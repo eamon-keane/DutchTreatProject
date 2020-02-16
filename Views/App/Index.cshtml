@@ -1,49 +1,57 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div class="product-info">
-    <img src="~/img/VanGogh.jpg" alt="VanGogh" />
-    <h3>Mug</h3>
-    <ul class="product-props">
-        <li>Price: €9.99 </li>
-        <li>Artist: Van Gogh</li>
-        <li>Title:</li>
-        <li>Description: Self-portrait</li>
-    </ul>
-    <button id="buyButton">Buy</button>
+<div class="row">
+    <div class="col-md-9">
+        <div class="product-info">
+            <img src="~/img/VanGogh.jpg" alt="VanGogh" />
+            <h3>Mug</h3>
+            <ul class="product-props">
+                <li>Price: €9.99 </li>
+                <li>Artist: Van Gogh</li>
+                <li>Title:</li>
+                <li>Description: Self-portrait</li>
+            </ul>
+            <button id="buyButton" class="btn btn-success">Buy</button>
+        </div>
+        <div id="theForm">
+            <form>
+                <label>Yourname:</label><br />
+                <input type="text" name="username" value="" />
+                <br />
+                <label>Email: </label><br />
+                <input type="email" value="" />
+                <br />
+                <label>Subject: </label><br />
+                <input type="text" value="" />
+                <br />
+                <label>Message: </label><br />
+                <textarea rows="4"></textarea>
+                <br />
+                <input type="submit" value="Send Message" />
+            </form>
+        </div>
+        <div id="loginToggle">Login</div>
+        <form class="popup-form">
+            <div>
+                <label>UserName</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" />
+            </div>
+            <div>
+                <input type="checkbox" />
+                <label>Remember me?</label>
+            </div>
+            <div>
+                <input type="submit" value="Login" />
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-3">
+        New content
+    </div>
 </div>
-<div id="theForm">
-    <form>
-        <label>Yourname:</label><br />
-        <input type="text" name="username" value="" />
-        <br />
-        <label>Email: </label><br />
-        <input type="email" value="" />
-        <br />
-        <label>Subject: </label><br />
-        <input type="text" value="" />
-        <br />
-        <label>Message: </label><br />
-        <textarea rows="4"></textarea>
-        <br />
-        <input type="submit" value="Send Message" />
-    </form>
-</div>
-<div id="loginToggle">Login</div>
-<form class="popup-form">
-    <div>
-        <label>UserName</label>
-        <input type="text" />
-    </div>
-    <div>
-        <label>Password</label>
-        <input type="password" />
-    </div>
-    <div>
-        <input type="checkbox" />
-        <label>Remember me?</label>
-    </div>
-    <div>
-        <input type="submit" value="Login" />
-    </div>
-</form>
