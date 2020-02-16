@@ -1,4 +1,5 @@
-﻿using DutchTreat.Services;
+﻿using DutchTreat.Data;
+using DutchTreat.Services;
 using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,15 +12,18 @@ namespace DutchTreat.Controllers
 {
     public class AppController: Controller
     {
-        private readonly IMailService _mailService;
+        private readonly IMailService mailService;
+        private readonly DutchContext context;
 
-        public AppController(IMailService mailService)
+        public AppController(IMailService mailService, DutchContext context)
         {
-            this._mailService = mailService;
+            this.mailService = mailService;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
+            var results = context.Products.ToList();
             return View();
         }
 
@@ -35,7 +39,7 @@ namespace DutchTreat.Controllers
             if (ModelState.IsValid)
             {
                 //send email
-                _mailService.SendMessage("e.keane10@gmail.com", model.Subject, $"From: {model.Name} - {model.Email}, Message: {model.Message}");
+                mailService.SendMessage("e.keane10@gmail.com", model.Subject, $"From: {model.Name} - {model.Email}, Message: {model.Message}");
                 ViewBag.UserMessage = "Mail Sent";
                 ModelState.Clear();
             }
@@ -51,6 +55,13 @@ namespace DutchTreat.Controllers
         {
             ViewBag.Title = "About";
             return View();
+        }
+
+        public IActionResult Shop()
+        {
+            var results = context.Products.OrderBy(p => p.Category).ToList();
+
+            return View(results.ToList());
         }
 
     }
