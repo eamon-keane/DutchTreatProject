@@ -2,6 +2,7 @@ using DutchTreat.Data;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +31,14 @@ namespace DutchTreat
                 );
 
             services.AddTransient<DutchSeeder>();
+
             services.AddControllersWithViews();
 
             services.AddTransient<IMailService, NullMailService>();
 
             services.AddScoped<IDutchRepository, DutchRepository>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddRazorPages();
 
