@@ -1,3 +1,4 @@
+using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace DutchTreat
 {
@@ -29,6 +31,8 @@ namespace DutchTreat
                     cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
                 }
                 );
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddTransient<DutchSeeder>();
 
