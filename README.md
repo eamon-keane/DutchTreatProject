@@ -1,4 +1,4 @@
-# DutchTreatProject
+# Dutch Treat Project
 
 A simple reference project built using ASP.net core 3.0 which utilises DI, AutoMapper, Entity Framework Core.
 
