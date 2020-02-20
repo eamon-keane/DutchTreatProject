@@ -25,7 +25,7 @@ namespace DutchTreat.Data
             context.Add(model);
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
             return context.Orders
                 .Include(o => o.Items)
