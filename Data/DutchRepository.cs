@@ -27,10 +27,18 @@ namespace DutchTreat.Data
 
         public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
-            return context.Orders
-                .Include(o => o.Items)
-                .ThenInclude(i => i.Product)
-                .ToList();
+            if (includeItems)
+            {
+                return context.Orders
+                       .Include(o => o.Items)
+                       .ThenInclude(i => i.Product)
+                       .ToList();
+            }
+            else
+            {
+                return context.Orders
+                     .ToList();
+            }
         }
 
         public IEnumerable<Product> GetAllProducts()
@@ -47,8 +55,8 @@ namespace DutchTreat.Data
                 logger.LogInformation($"Failed to get all products:{ex}");
                 return null;
             }
-            
-            
+
+
         }
 
         public Order GetOrderById(int id)

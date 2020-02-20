@@ -34,7 +34,7 @@ namespace DutchTreat.Controllers
 
                 var results = repository.GetAllOrders(includeItems);
 
-                return Ok(mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(repository.GetAllOrders()));
+                return Ok(mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(repository.GetAllOrders(includeItems)));
             }
             catch (Exception ex)
             {
