@@ -8,5 +8,12 @@
 			"Default": "Information",
 			"Microsoft": "Warning"
 		}
+	},
+
+	"Tokens": {
+		"Key": "sampletestkey12377238917329817",
+		"Issuer": "localhost",
+		"ExpiryTimeInMins": "30",
+		"Audience": "users"
 	}
 }
