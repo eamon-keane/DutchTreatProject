@@ -1,4 +1,4 @@
-﻿using DutchTreat.Data.Entities;
+﻿        using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -60,8 +60,13 @@ namespace DutchTreat.Controllers
                         RedirectToAction("Shop", "App");
                     }
                 }
-                logger.LogInformation($"User Failed to login {model.Username} {model.Password}");
-                ModelState.AddModelError("", "Failed to Login");
+
+                else
+                {
+                    logger.LogInformation($"User Failed to login {model.Username} {model.Password}");
+                    ModelState.AddModelError("", "Failed to Login");
+                }
+
             }
 
 

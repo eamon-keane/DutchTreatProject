@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./wwwroot/clientapp/out-tsc/app",
+    "types": [],
+    "target": "es5"
+  },
+  "files": [
+    "ClientApp/main.ts",
+    "ClientApp/polyfills.ts"
+  ],
+  "include": [
+    "ClientApp/**/*.ts"
+  ],
+  "exclude": [
+    "ClientApp/test.ts",
+    "ClientApp/**/*.spec.ts"
+  ],
+
+  "skipLibCheck": true
+
+}
