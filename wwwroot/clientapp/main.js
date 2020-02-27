@@ -142,16 +142,22 @@ var DataService = /** @class */ (function () {
         }));
     };
     DataService.prototype.AddToOrder = function (newProduct) {
-        var item = new _order__WEBPACK_IMPORTED_MODULE_4__["OrderItem"]();
-        item.productId = newProduct.id;
-        item.productArtist = newProduct.artist;
-        item.productArtId = newProduct.artId;
-        item.productCategory = newProduct.category;
-        item.productSize = newProduct.size;
-        item.productTitle = newProduct.title;
-        item.unitPrice = newProduct.price;
-        item.quantity = 1;
-        this.order.items.push(item);
+        var item = this.order.items.find(function (i) { return i.productId == newProduct.id; });
+        if (item) {
+            item.quantity++;
+        }
+        else {
+            item = new _order__WEBPACK_IMPORTED_MODULE_4__["OrderItem"]();
+            item.productId = newProduct.id;
+            item.productArtist = newProduct.artist;
+            item.productArtId = newProduct.artId;
+            item.productCategory = newProduct.category;
+            item.productSize = newProduct.size;
+            item.productTitle = newProduct.title;
+            item.unitPrice = newProduct.price;
+            item.quantity = 1;
+            this.order.items.push(item);
+        }
     };
     DataService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
@@ -178,11 +184,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Order", function() { return Order; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderItem", function() { return OrderItem; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+
 
 var Order = /** @class */ (function () {
     function Order() {
         this.items = new Array();
     }
+    Object.defineProperty(Order.prototype, "subtotal", {
+        get: function () {
+            return lodash__WEBPACK_IMPORTED_MODULE_1__["sum"](lodash__WEBPACK_IMPORTED_MODULE_1__["map"](this.items, function (i) { return i.unitPrice * i.quantity; }));
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Order;
 }());
 
@@ -375,7 +391,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h3>Cart component</h3>\r\n<div>Count {{ data.order.items.length}}</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h3>Cart component</h3>\r\n<div>#Items: {{ data.order.items.length}}</div>\r\n<div>Subtotal: {{ data.order.subtotal | currency: \"EUR\": true}}</div>\r\n<table class=\"table table-sm table-hover \">\r\n    <thead>\r\n        <tr>\r\n            <td>Product</td>\r\n            <td>#</td>\r\n            <td>€</td>\r\n            <td>Total</td>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let o of data.order.items\">\r\n            <td>{{ o.productCategory}} - {{o.productTitle}}</td>\r\n            <td>{{ o.quantity}}</td>\r\n            <td>{{ o.unitPrice | currency: \"EUR\": true}}</td>\r\n            <td>{{ o.unitPrice * o.quantity | currency: \"EUR\": true}}</td>\r\n        </tr>\r\n    </tbody>\r\n\r\n\r\n</table>");
 
 /***/ }),
 

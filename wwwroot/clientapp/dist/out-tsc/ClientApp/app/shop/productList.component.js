@@ -13,6 +13,9 @@ let ProductList = class ProductList {
             }
         });
     }
+    addProduct(product) {
+        this.data.AddToOrder(product);
+    }
 };
 ProductList = __decorate([
     Component({
