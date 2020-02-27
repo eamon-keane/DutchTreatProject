@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs"
 import { map } from "rxjs/operators";
 import { Product } from './product';
+import { Order, OrderItem } from './order';
 
 @Injectable()
 export class DataService {
@@ -11,6 +12,7 @@ export class DataService {
 
     }
 
+    public order: Order = new Order();
 
     public products: Product[] = [];
 
@@ -22,5 +24,22 @@ export class DataService {
                 return true;
 
             }));
+    }
+
+    public AddToOrder(newProduct: Product) {
+
+        var item: OrderItem = new OrderItem();
+
+        item.productId = newProduct.id;
+        item.productArtist = newProduct.artist;
+        item.productArtId = newProduct.artId;
+        item.productCategory = newProduct.category;
+        item.productSize = newProduct.size;
+        item.productTitle = newProduct.title;
+        item.unitPrice = newProduct.price;
+        item.quantity = 1;
+
+        this.order.items.push(item);
+
     }
 }
