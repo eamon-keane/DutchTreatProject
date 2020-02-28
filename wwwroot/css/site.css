@@ -86,3 +86,9 @@ ul.product-props {
     menu li:last-of-type::after{
         content: '';
     }*/
+
+/*footer .center{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}*/

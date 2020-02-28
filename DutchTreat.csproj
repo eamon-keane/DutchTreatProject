@@ -33,10 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\app\checkout\checkout.component.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\dataService.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\order.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\product.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shop\cart.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\shop\shop.component.ts" />
   </ItemGroup>
 
 </Project>
