@@ -12,9 +12,19 @@ export class DataService {
 
     }
 
+    private token: string = "";
+
+    private tokenExpiration: Date;
+
+
+
     public order: Order = new Order();
 
     public products: Product[] = [];
+
+    public get loginRequired(): boolean {
+        return this.token.length == 0 || this.tokenExpiration > new Date();
+    }
 
     loadProducts(): Observable<boolean> {
         return this.http.get("/api/products")

@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\app\checkout\checkout.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\login\login.component.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\dataService.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\order.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\product.ts" />

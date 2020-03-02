@@ -5,8 +5,12 @@ import { Order, OrderItem } from './order';
 let DataService = class DataService {
     constructor(http) {
         this.http = http;
+        this.token = "";
         this.order = new Order();
         this.products = [];
+    }
+    get loginRequired() {
+        return this.token.length == 0 || this.tokenExpiration > new Date();
     }
     loadProducts() {
         return this.http.get("/api/products")
