@@ -206,15 +206,26 @@ var Login = /** @class */ (function () {
     function Login(data, router) {
         this.data = data;
         this.router = router;
+        this.errorMessage = "";
         this.creds = {
             username: "",
             password: ""
         };
     }
     Login.prototype.onLogin = function () {
+        var _this = this;
         // call the login service
-        alert(this.creds.username);
-        this.creds.username += "!";
+        this.data.login(this.creds)
+            .subscribe(function (success) {
+            if (success) {
+                if (_this.data.order.items.length > 0) {
+                    _this.router.navigate([""]);
+                }
+                else {
+                    _this.router.navigate(["checkout"]);
+                }
+            }
+        }, function (err) { return _this.errorMessage = "Failed to login"; });
     };
     Login.ctorParameters = function () { return [
         { type: _shared_dataService__WEBPACK_IMPORTED_MODULE_2__["DataService"] },
@@ -267,6 +278,14 @@ var DataService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    DataService.prototype.login = function (creds) {
+        var _this = this;
+        return this.http.post("/account/createtoken", creds).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            _this.token = data.token;
+            _this.tokenExpiration = data.expiration;
+            return true;
+        }));
+    };
     DataService.prototype.loadProducts = function () {
         var _this = this;
         return this.http.get("/api/products")
@@ -582,7 +601,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <div class=\"col-md-4 offset-md-4\">\n    <form (submit)=\"onLogin()\" #theForm = \"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"creds.username\" #username=\"ngModel\" required/>\n          <div class=\"text-danger\" *ngIf=\"username.invalid && username.errors.required && username.touched\">Username is required</div>\n      </div>\n      <div class=\"form-group\">\r\n          <label for=\"password\">Password</label>\r\n          <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"creds.password\" #password=\"ngModel\" required />\r\n          <div class=\"text-danger\" *ngIf=\"password.invalid && password.errors.required && password.touched\">Password is required</div>\r\n      </div>\n      <div class=\"form-group\">\n        <input type=\"submit\" class=\"btn btn-success\" value=\"Login\" [disabled]=\"theForm.invalid\"/>\n        <a routerLink =\"/\" class=\"btn btn-default\">Cancel</a>\n      </div>\n    </form>\n  </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <div class=\"col-md-4 offset-md-4\">\n      <div *ngIf =\"errorMessage\" class=\"alert alert-warning\">{{errorMessage}}</div>\n    <form (submit)=\"onLogin()\" #theForm = \"ngForm\" novalidate>\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"creds.username\" #username=\"ngModel\" required/>\n          <div class=\"text-danger\" *ngIf=\"username.invalid && username.errors.required && username.touched\">Username is required</div>\n      </div>\n      <div class=\"form-group\">\r\n          <label for=\"password\">Password</label>\r\n          <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"creds.password\" #password=\"ngModel\" required />\r\n          <div class=\"text-danger\" *ngIf=\"password.invalid && password.errors.required && password.touched\">Password is required</div>\r\n      </div>\n      <div class=\"form-group\">\n        <input type=\"submit\" class=\"btn btn-success\" value=\"Login\" [disabled]=\"theForm.invalid\"/>\n        <a routerLink =\"/\" class=\"btn btn-default\">Cancel</a>\n      </div>\n    </form>\n  </div>\n</div>");
 
 /***/ }),
 

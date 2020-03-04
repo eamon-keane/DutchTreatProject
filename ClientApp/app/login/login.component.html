@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-md-4 offset-md-4">
+      <div *ngIf ="errorMessage" class="alert alert-warning">{{errorMessage}}</div>
     <form (submit)="onLogin()" #theForm = "ngForm" novalidate>
       <div class="form-group">
         <label for="username">Username</label>
